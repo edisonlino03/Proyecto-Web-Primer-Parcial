@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Nombre del Integrante 2" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Usuario</title>
+
+  <!-- Estilo externo -->
+  <link rel="stylesheet" href="css/estilos.css" />
+
+  <!-- Estilo interno -->
+  <style>
+    form {
+      background-color: #f9f9f9;
+      padding: 25px;
+      width: 60%;
+      margin: 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      display: none;
+    }
+
+    .checkbox-container {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 8px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: blue;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+
+    .titulo-container {
+      background-color: darkblue; 
+      color: white; 
+      text-align: center; 
+      padding: 20px; 
+      width: 100%; 
+      box-sizing: border-box; 
+      margin: 0; 
+    }
+
+    h1::before {
+      content: "👤";
+    }
+
+    fieldset {
+      border: none;
+      margin-top: 12px;
+      padding: 0;
+    }
+
+    fieldset legend {
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-top: 5px;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      margin-top: 0;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      width: auto;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: var(--darkblue-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    :root {
+      --primary-color: #00bfff;
+      --hover-color: #009ace;
+      --background-color: #fefefe;
+      --text-color: white;
+      --darkblue-color: darkblue;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="titulo-container">
+    <h1 style="margin: 0;">Formulario de Registro de Usuario</h1>
+  </div>
+
+  <form id="formRegistro" novalidate>
+
+    <label for="nombre">Nombre completo:</label>
+    <input type="text" id="nombre" aria-describedby="errorNombre" />
+    <span class="error" id="errorNombre">* Campo obligatorio</span>
+
+    <label for="correo">Correo electrónico:</label>
+    <input type="email" id="correo" aria-describedby="errorCorreo" />
+    <span class="error" id="errorCorreo">* Ingrese un correo válido</span>
+
+    <label for="carrera">Carrera:</label>
+    <select id="carrera" aria-describedby="errorCarrera">
+      <option value="">-- Seleccione --</option>
+      <option value="Ingeniería de Software">Ingeniería de Software</option>
+      <option value="Derecho">Derecho</option>
+      <option value="Administración">Administración</option>
+      <option value="Psicología">Psicología</option>
+    </select>
+    <span class="error" id="errorCarrera">* Seleccione una carrera</span>
+
+    <fieldset>
+      <legend>Tipo de usuario:</legend>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="tipo" value="Estudiante" />
+          Estudiante
+        </label>
+        <label>
+          <input type="radio" name="tipo" value="Docente" />
+          Docente
+        </label>
+      </div>
+      <span class="error" id="errorTipo">* Seleccione un tipo</span>
+    </fieldset>
+
+    <label for="usuario">Usuario:</label>
+    <input type="text" id="usuario" aria-describedby="errorUsuario" />
+    <span class="error" id="errorUsuario">* Campo obligatorio</span>
+
+    <label for="clave">Contraseña:</label>
+    <input type="password" id="clave" aria-describedby="errorClave" />
+    <span class="error" id="errorClave">* Ingrese al menos 6 caracteres</span>
+
+    <div class="checkbox-container">
+      <input type="checkbox" id="politicas" />
+      <label for="politicas" style="font-weight: normal; margin: 0; cursor: pointer;">
+        Acepto las políticas de uso de la biblioteca:
+      </label>
+      <span class="error" id="errorPoliticas" style="margin-left: 10px;">* Debe aceptar las políticas</span>
+    </div>
+
+    <button type="submit">Registrar Usuario</button>
+  </form>
+
+  <!-- Script interno -->
+  <script>
+    const form = document.getElementById('formRegistro');
+
+    const campos = {
+      nombre: {
+        input: document.getElementById('nombre'),
+        error: document.getElementById('errorNombre'),
+        validar: valor => valor.trim() !== "",
+      },
+      correo: {
+        input: document.getElementById('correo'),
+        error: document.getElementById('errorCorreo'),
+        validar: valor => /^[^@]+@[^@]+\\.[a-zA-Z]{2,}$/.test(valor),
+      },
+      carrera: {
+        input: document.getElementById('carrera'),
+        error: document.getElementById('errorCarrera'),
+        validar: valor => valor !== "",
+      },
+      tipo: {
+        error: document.getElementById('errorTipo'),
+        validar: () => document.querySelector('input[name="tipo"]:checked'),
+      },
+      usuario: {
+        input: document.getElementById('usuario'),
+        error: document.getElementById('errorUsuario'),
+        validar: valor => valor.trim() !== "",
+      },
+      clave: {
+        input: document.getElementById('clave'),
+        error: document.getElementById('errorClave'),
+        validar: valor => valor.length >= 6,
+      },
+      politicas: {
+        input: document.getElementById('politicas'),
+        error: document.getElementById('errorPoliticas'),
+        validar: valor => valor === true,
+      },
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let valido = true;
+
+      for (let key in campos) {
+        const campo = campos[key];
+        const valor = key === 'tipo'
+          ? campo.validar()
+          : key === 'politicas'
+            ? campo.input.checked
+            : campo.input.value;
+
+        if (!campo.validar(valor)) {
+          campo.error.style.display = "inline";
+          valido = false;
+        } else {
+          campo.error.style.display = "none";
+        }
+      }
+
+      if (valido) {
+        alert("Usuario registrado correctamente.");
+        form.reset();
+      }
+    });
+  </script>
+
+  <footer>
+    Biblioteca Escolar 2025
+  </footer>
+
+</body>
+</html>
+

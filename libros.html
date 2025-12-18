@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Nombre del Integrante 4">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería de Libros</title>
+
+  <!-- Estilo externo -->
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <!-- Estilo interno -->
+  <style>
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .tarjeta-libro {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .tarjeta-libro.resaltado {
+      border: 3px solid red;
+      box-shadow: 0 0 10px red;
+      background-color: #ffe5e5;
+    }
+
+    /* Estilo para las tarjetas de libros pares */
+    .tarjeta-libro:nth-child(even) {
+      background-color: #343434; /* Color gris más oscuro */
+      color: white;
+    }
+
+    .tarjeta-libro:nth-child(even) .titulo-libro,
+    .tarjeta-libro:nth-child(even) .autor-libro,
+    .tarjeta-libro:nth-child(even) .genero-libro,
+    .tarjeta-libro:nth-child(even) .descripcion-libro {
+       color: white;
+    }
+
+    .tarjeta-libro:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .tarjeta-libro img {
+      width: 100%;
+     height: 220px;
+     object-fit: contain;
+     background-color: #fff;
+      padding: 10px;
+    }
+
+
+    .contenido-libro {
+      padding: 15px;
+    }
+
+    .titulo-libro {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .autor-libro {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .genero-libro {
+      font-size: 13px;
+      font-style: italic;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .descripcion-libro {
+      font-size: 17px;
+      margin-top: 8px;
+      color: #555;
+    }
+
+    .titulo-container {
+      background-color: darkblue; 
+      color: white; 
+      text-align: center; 
+      padding: 20px; 
+      width: 100%;
+      box-sizing: border-box; 
+      margin: 0; 
+    }
+
+     h1::before {
+    content: "🖼️"
+     }
+
+    footer {
+      background-color: var(--darkblue-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    :root {
+      --primary-color: #00bfff;
+      --hover-color: #009ace;
+      --background-color: #fefefe;
+      --text-color: white;
+      --darkblue-color: darkblue;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="titulo-container">
+    <h1 style="margin: 0;">Galería de Libros</h1>
+  </div>
+
+  <div class="galeria">
+
+    <!-- Fantasía -->
+    <div class="tarjeta-libro" data-slug="el-hobbit">
+      <img src="img/libro1.jpg" alt="El Hobbit">
+      <div class="contenido-libro">
+        <div class="titulo-libro">El Hobbit</div>
+        <div class="autor-libro">J.R.R. Tolkien</div>
+        <div class="genero-libro">Fantasía</div>
+        <p class="descripcion-libro">Un hobbit emprende una aventura épica para recuperar un tesoro protegido por un dragón.</p>
+      </div>
+    </div>
+
+    <div class="tarjeta-libro" data-slug="harry-potter">
+      <img src="img/libro2.jpg" alt="Harry Potter">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Harry Potter y la Piedra Filosofal</div>
+        <div class="autor-libro">J.K. Rowling</div>
+        <div class="genero-libro">Fantasía</div>
+        <p class="descripcion-libro">Un niño descubre que es un mago y asiste a una escuela mágica llena de misterios.</p>
+      </div>
+    </div>
+
+    <div class="tarjeta-libro" data-slug="narnia">
+      <img src="img/libro3.jpg" alt="Narnia">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Las Crónicas de Narnia</div>
+        <div class="autor-libro">C.S. Lewis</div>
+        <div class="genero-libro">Fantasía</div>
+        <p class="descripcion-libro">Un grupo de niños viaja a un mundo mágico donde luchan contra el mal y descubren su destino.</p>
+      </div>
+    </div>
+
+    <!-- Ciencia Ficción -->
+    <div class="tarjeta-libro" data-slug="dune">
+      <img src="img/libro4.jpg" alt="Dune">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Dune</div>
+        <div class="autor-libro">Frank Herbert</div>
+        <div class="genero-libro">Ciencia Ficción</div>
+        <p class="descripcion-libro">En un planeta desértico, un joven líder debe controlar el recurso más valioso del universo.</p>
+      </div>
+    </div>
+
+    <div class="tarjeta-libro" data-slug="fundacion">
+      <img src="img/libro5.jpg" alt="Fundación">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Fundación</div>
+        <div class="autor-libro">Isaac Asimov</div>
+        <div class="genero-libro">Ciencia Ficción</div>
+        <p class="descripcion-libro">Científicos crean un plan para salvar el conocimiento humano durante la caída de un imperio galáctico.</p>
+      </div>
+    </div>
+
+    <div class="tarjeta-libro" data-slug="Neuromante">
+      <img src="img/libro6.jpg" alt="Neuromante">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Neuromante</div>
+        <div class="autor-libro">William Gibson</div>
+        <div class="genero-libro">Ciencia Ficción</div>
+        <p class="descripcion-libro">Un hacker es contratado para ejecutar un ciberataque en un futuro dominado por la tecnología.</p>
+      </div>
+    </div>
+
+    <!-- Clásicos -->
+    <div class="tarjeta-libro" data-slug="orgullo-prejuicio">
+      <img src="img/libro7.jpg" alt="Orgullo y Prejuicio">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Orgullo y Prejuicio</div>
+        <div class="autor-libro">Jane Austen</div>
+        <div class="genero-libro">Clásicos</div>
+        <p class="descripcion-libro">Una historia de amor y clase social en la Inglaterra del siglo XIX.</p>
+      </div>
+    </div>
+
+    <div class="tarjeta-libro" data-slug="moby-dick">
+      <img src="img/libro8.jpg" alt="Moby Dick">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Moby Dick</div>
+        <div class="autor-libro">Herman Melville</div>
+        <div class="genero-libro">Clásicos</div>
+        <p class="descripcion-libro">El capitán Ahab persigue obsesivamente a una enorme ballena blanca.</p>
+      </div>
+    </div>
+
+    <div class="tarjeta-libro" data-slug="la-odisea">
+      <img src="img/libro9.jpg" alt="La Odisea">
+      <div class="contenido-libro">
+        <div class="titulo-libro">La Odisea</div>
+        <div class="autor-libro">Homero</div>
+        <div class="genero-libro">Clásicos</div>
+        <p class="descripcion-libro">Ulises enfrenta monstruos y dioses en su viaje de regreso a casa tras la guerra de Troya.</p>
+      </div>
+    </div>
+
+    <!-- Novela Contemporánea -->
+    <div class="tarjeta-libro" data-slug="sombra-viento">
+      <img src="img/libro10.jpg" alt="La Sombra del Viento">
+      <div class="contenido-libro">
+        <div class="titulo-libro">La Sombra del Viento</div>
+        <div class="autor-libro">Carlos Ruiz Zafón</div>
+        <div class="genero-libro">Novela Contemporánea</div>
+        <p class="descripcion-libro">Un joven encuentra un libro olvidado y se ve envuelto en un misterio literario en la Barcelona de posguerra.</p>
+      </div>
+    </div>
+
+    <div class="tarjeta-libro" data-slug="cometas-cielo">
+      <img src="img/libro11.jpg" alt="Cometas en el cielo">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Cometas en el cielo</div>
+        <div class="autor-libro">Khaled Hosseini</div>
+        <div class="genero-libro">Novela Contemporánea</div>
+        <p class="descripcion-libro">Una emotiva historia de amistad, culpa y redención ambientada en Afganistán y EE.UU.</p>
+      </div>
+    </div>
+
+    <div class="tarjeta-libro" data-slug="juegos-hambre">
+      <img src="img/libro12.jpg" alt="Los juegos del hambre">
+      <div class="contenido-libro">
+        <div class="titulo-libro">Los juegos del hambre</div>
+        <div class="autor-libro">Suzanne Collins</div>
+        <div class="genero-libro">Novela Contemporánea</div>
+        <p class="descripcion-libro">Katniss Everdeen lucha por sobrevivir en una competencia televisada por el gobierno opresor.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Función para obtener parámetro url
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const libroBuscado = getQueryParam('buscar');
+      if (libroBuscado) {
+        // Busca el elemento con data-slug igual al parámetro
+        const elemento = document.querySelector(`.tarjeta-libro[data-slug="${libroBuscado}"]`);
+        if (elemento) {
+          elemento.classList.add('resaltado');
+          // Opcional: hacer scroll hasta el libro resaltado
+          elemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          console.log('Libro no encontrado para resaltar.');
+        }
+      }
+    });
+  </script>
+
+  <footer>
+    Biblioteca Escolar 2025
+  </footer>
+
+</body>
+</html>

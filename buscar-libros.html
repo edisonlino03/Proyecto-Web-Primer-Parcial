@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Todos los integrantes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buscar Libros - Sistema de Gestión de Biblioteca Escolar</title>
+
+  <!-- Estilo externo -->
+  <link rel="stylesheet" href="css/estilos.css" />
+
+  <!-- Estilo interno -->
+  <style>
+    :root {
+      --primary-color: #00bfff;
+      --hover-color: #009ace;
+      --background-color: #fefefe;
+      --text-color: white;
+      --darkblue-color: darkblue;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: var(--background-color);
+    }
+
+    .titulo-principal-container {
+      background-color: var(--darkblue-color);
+      width: 100%;
+      padding: 20px 0;
+      box-sizing: border-box;
+      text-align: center;
+      color: var(--text-color);
+    }
+
+    .titulo-principal-container h1 {
+      font-size: 28px;
+      margin: 0;
+      padding-bottom: 10px;
+    }
+
+    .contenedor {
+      max-width: 600px;
+      margin: auto;
+      padding: 30px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .busqueda {
+      margin: 20px 0;
+    }
+
+    .busqueda input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .busqueda button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: var(--primary-color);
+      color: var(--text-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .busqueda button:hover {
+      background-color: var(--hover-color);
+    }
+
+    .mensaje-error {
+      color: red;
+      margin-top: 20px;
+      display: none; 
+    }
+
+    h1::before {
+      content: "🔍";
+    }
+
+    footer {
+      background-color: var(--darkblue-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 16px;
+      /* Footer will be at bottom due to flex layout */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="titulo-principal-container">
+    <h1>Buscar Libro</h1>
+  </div>
+
+  <div class="contenedor">
+    <div class="busqueda">
+      <input type="text" id="nombreLibro" placeholder="Escribe el nombre del libro..." />
+      <button onclick="buscarLibro()">Buscar</button>
+    </div>
+    <div class="mensaje-error" id="mensajeError">El libro no se encuentra en el catálogo.</div>
+  </div>
+
+  <script>
+    // Lista de libros registrados con nombre y slug que coincide con el id o referencia en libros.html
+    const libros = [
+      { nombre: "El Hobbit", slug: "el-hobbit" },
+      { nombre: "Harry Potter y la Piedra Filosofal", slug: "harry-potter" },
+      { nombre: "Las Crónicas de Narnia", slug: "narnia" },
+      { nombre: "Dune", slug: "dune" },
+      { nombre: "Fundación", slug: "fundacion" },
+      { nombre: "Neuromante", slug: "neuromante" },
+      { nombre: "Orgullo y Prejuicio", slug: "orgullo-prejuicio" },
+      { nombre: "Moby Dick", slug: "moby-dick" },
+      { nombre: "La Odisea", slug: "la-odisea" },
+      { nombre: "La Sombra del Viento", slug: "sombra-viento" },
+      { nombre: "Cometas en el cielo", slug: "cometas-cielo" },
+      { nombre: "Los juegos del hambre", slug: "juegos-hambre" }
+    ];
+
+    function buscarLibro() {
+      const nombreLibro = document.getElementById("nombreLibro").value.trim();
+      const libroEncontrado = libros.find(libro => libro.nombre.toLowerCase() === nombreLibro.toLowerCase());
+      const mensajeError = document.getElementById("mensajeError");
+      mensajeError.style.display = "none";
+
+      if (libroEncontrado) {
+        // Redirigir a libros.html incluyendo slug del libro en query param para resaltar
+        const url = `libros.html?buscar=${encodeURIComponent(libroEncontrado.slug)}`;
+        window.location.href = url;
+      } else {
+        mensajeError.style.display = "block";
+      }
+    }
+  </script>
+
+  <footer>
+    Biblioteca Escolar 2025
+  </footer>
+  
+</body>
+</html>
+

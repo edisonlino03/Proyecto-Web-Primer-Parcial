@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Nombre del Integrante 3">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar Nuevo Libro</title>
+
+  <!-- Hoja de estilo externa -->
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <!-- Estilo interno -->
+  <style>
+    form {
+      background-color: #f9f9f9;
+      padding: 20px;
+      width: 60%;
+      margin: 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    label + input,
+    label + select,
+    label + textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      display: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: blue;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+
+    fieldset {
+      border: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+
+    legend {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .checkbox-container {
+      margin-top: 10px;
+    }
+
+    .titulo-container {
+      background-color: darkblue;
+      color: white; 
+      text-align: center;
+      padding: 20px; 
+      width: 100%; 
+      box-sizing: border-box; 
+      margin: 0; 
+    }
+
+    h1::before {
+      content: "➕";
+    }
+
+    footer {
+      background-color: var(--darkblue-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    :root {
+      --primary-color: #00bfff;
+      --hover-color: #009ace;
+      --background-color: #fefefe;
+      --text-color: white;
+      --darkblue-color: darkblue;
+    }
+  </style>
+</head>
+<body>
+
+   <div class="titulo-container">
+    <h1 style="margin: 0;">Formulario para Agregar Libro</h1>
+  </div>
+
+  <form id="formLibro">
+    <fieldset>
+      <legend>Información del Libro</legend>
+
+      <label for="titulo">Título del libro:</label>
+      <input type="text" id="titulo">
+      <span class="error" id="errorTitulo">* Campo obligatorio</span>
+
+      <label for="autor">Autor:</label>
+      <input type="text" id="autor">
+      <span class="error" id="errorAutor">* Campo obligatorio</span>
+
+      <label for="genero">Género:</label>
+      <select id="genero">
+        <option value="">-- Seleccione --</option>
+        <option value="Fantasía">Fantasía</option>
+        <option value="Ciencia Ficción">Ciencia Ficción</option>
+        <option value="Clásicos">Clásicos</option>
+        <option value="Novela Contemporánea">Novela Contemporánea</option>
+      </select>
+      <span class="error" id="errorGenero">* Seleccione un género</span>
+
+      <label for="anio">Año de publicación:</label>
+      <input type="number" id="anio" min="1000" max="2099">
+      <span class="error" id="errorAnio">* Ingrese un año válido</span>
+
+      <label for="descripcion">Descripción corta:</label>
+      <textarea id="descripcion" rows="3"></textarea>
+      <span class="error" id="errorDescripcion">* Campo obligatorio</span>
+
+      <label for="disponible">Disponible para préstamo:</label>
+      <div class="checkbox-container">
+        <input type="checkbox" id="disponible">
+        <span class="error" id="errorDisponible">* Marque si está disponible</span>
+      </div>
+    </fieldset>
+
+    <button type="submit">Agregar Libro</button>
+  </form>
+
+  <!-- Script interno -->
+  <script>
+    const form = document.getElementById('formLibro');
+
+    const campos = {
+      titulo: {
+        input: document.getElementById('titulo'),
+        error: document.getElementById('errorTitulo'),
+        validar: valor => valor.trim() !== ""
+      },
+      autor: {
+        input: document.getElementById('autor'),
+        error: document.getElementById('errorAutor'),
+        validar: valor => valor.trim() !== ""
+      },
+      genero: {
+        input: document.getElementById('genero'),
+        error: document.getElementById('errorGenero'),
+        validar: valor => valor !== ""
+      },
+      anio: {
+        input: document.getElementById('anio'),
+        error: document.getElementById('errorAnio'),
+        validar: valor => valor >= 1000 && valor <= 2099
+      },
+      descripcion: {
+        input: document.getElementById('descripcion'),
+        error: document.getElementById('errorDescripcion'),
+        validar: valor => valor.trim() !== ""
+      },
+      disponible: {
+        input: document.getElementById('disponible'),
+        error: document.getElementById('errorDisponible'),
+        validar: valor => valor === true
+      }
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      let valido = true;
+
+      for (let key in campos) {
+        const campo = campos[key];
+        const valor = key === 'disponible' ? campo.input.checked : campo.input.value;
+
+        if (!campo.validar(valor)) {
+          campo.error.style.display = "inline";
+          valido = false;
+        } else {
+          campo.error.style.display = "none";
+        }
+      }
+
+      if (valido) {
+        alert(`Libro "${campos.titulo.input.value}" agregado correctamente.`);
+        form.reset();
+      }
+    });
+  </script>
+
+<footer>
+    Biblioteca Escolar 2025
+  </footer>
+
+</body>
+</html>

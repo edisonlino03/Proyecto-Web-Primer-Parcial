@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Nombre del Integrante 3" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Devolución de Libro</title>
+
+  <!-- Estilo externo -->
+  <link rel="stylesheet" href="css/estilos.css" />
+
+  <!-- Estilo interno -->
+  <style>
+    form {
+      background-color: #f9f9f9;
+      padding: 25px;
+      width: 60%;
+      margin: 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    /* For radio group */
+    .radio-group {
+      display: flex;
+      gap: 20px;
+      margin-top: 5px;
+      font-weight: normal;
+    }
+
+    .radio-group label {
+      font-weight: normal;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .radio-group input[type="radio"] {
+      margin-right: 6px;
+      cursor: pointer;
+    }
+
+    .confirmacion-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px; 
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: normal;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    input[type="checkbox"] {
+      cursor: pointer;
+      margin: 0;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      display: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: blue;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+
+    .titulo-container {
+      background-color: darkblue;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    h1::before {
+      content: "📥";
+    }
+
+    footer {
+      background-color: var(--darkblue-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    :root {
+      --primary-color: #00bfff;
+      --hover-color: #009ace;
+      --background-color: #fefefe;
+      --text-color: white;
+      --darkblue-color: darkblue;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="titulo-container">
+    <h1 style="margin: 0;">Formulario de Devolución de Libro</h1>
+  </div>
+
+  <form id="formDevolucion">
+    <label for="usuario">Nombre del usuario:</label>
+    <input type="text" id="usuario" aria-label="Nombre del usuario" />
+    <span class="error" id="errorUsuario">* Campo obligatorio</span>
+
+    <label for="libro">Libro a devolver:</label>
+    <select id="libro" aria-label="Libro a devolver">
+      <option value="">-- Seleccione un libro --</option>
+      <option value="El Hobbit">El Hobbit</option>
+      <option value="Harry Potter y la Piedra Filosofal">Harry Potter y la Piedra Filosofal</option>
+      <option value="Las Crónicas de Narnia">Las Crónicas de Narnia</option>
+      <option value="Dune">Dune</option>
+      <option value="Fundación">Fundación</option>
+      <option value="Neuromante">Neuromante</option>
+      <option value="Orgullo y Prejuicio">Orgullo y Prejuicio</option>
+      <option value="Moby Dick">Moby Dick</option>
+      <option value="La Odisea">La Odisea</option>
+      <option value="La Sombra del Viento">La Sombra del Viento</option>
+      <option value="Cometas en el cielo">Cometas en el cielo</option>
+      <option value="Los juegos del hambre">Los juegos del hambre</option>
+    </select>
+    <span class="error" id="errorLibro">* Seleccione un libro</span>
+
+    <label for="fecha">Fecha de devolución:</label>
+    <input type="date" id="fecha" aria-label="Fecha de devolución" />
+    <span class="error" id="errorFecha">* Seleccione una fecha</span>
+
+    <label>Estado del libro:</label>
+    <div class="radio-group" role="radiogroup" aria-labelledby="estado-label">
+      <label for="estado-bueno"
+        ><input
+          type="radio"
+          id="estado-bueno"
+          name="estado"
+          value="Bueno"
+        />
+        Bueno</label
+      >
+      <label for="estado-danado"
+        ><input
+          type="radio"
+          id="estado-danado"
+          name="estado"
+          value="Dañado"
+        />
+        Dañado</label
+      >
+    </div>
+    <span class="error" id="errorEstado">* Seleccione una opción</span>
+
+    <label for="observaciones">Observaciones:</label>
+    <textarea
+      id="observaciones"
+      rows="3"
+      aria-label="Observaciones"
+    ></textarea>
+
+    <div class="confirmacion-group">
+      <label for="confirmacion">Confirmo que revisé el estado del libro:</label>
+      <div class="checkbox-container">
+        <input type="checkbox" id="confirmacion" />
+        <span class="error" id="errorConfirmacion">* Debe confirmar la revisión</span>
+      </div>
+    </div>
+
+    <button type="submit">Registrar Devolución</button>
+  </form>
+
+  <!-- Script interno -->
+  <script>
+    const form = document.getElementById("formDevolucion");
+
+    const campos = {
+      usuario: {
+        input: document.getElementById("usuario"),
+        error: document.getElementById("errorUsuario"),
+        validar: (valor) => valor.trim() !== "",
+      },
+      libro: {
+        input: document.getElementById("libro"),
+        error: document.getElementById("errorLibro"),
+        validar: (valor) => valor !== "",
+      },
+      fecha: {
+        input: document.getElementById("fecha"),
+        error: document.getElementById("errorFecha"),
+        validar: (valor) => valor !== "" && new Date(valor) >= new Date(),
+      },
+      estado: {
+        error: document.getElementById("errorEstado"),
+        validar: () => document.querySelector('input[name="estado"]:checked'),
+      },
+      confirmacion: {
+        input: document.getElementById("confirmacion"),
+        error: document.getElementById("errorConfirmacion"),
+        validar: (valor) => valor === true,
+      },
+    };
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      let valido = true;
+
+      for (let key in campos) {
+        const campo = campos[key];
+        const valor =
+          key === "estado"
+            ? campo.validar()
+            : key === "confirmacion"
+            ? campo.input.checked
+            : campo.input.value;
+
+        if (!campo.validar(valor)) {
+          campo.error.style.display = "inline";
+          valido = false;
+        } else {
+          campo.error.style.display = "none";
+        }
+      }
+
+      if (valido) {
+        alert("Devolución registrada correctamente.");
+        form.reset();
+      }
+    });
+  </script>
+
+  <footer>
+    Biblioteca Escolar 2025
+  </footer>
+  
+</body>
+</html>
+

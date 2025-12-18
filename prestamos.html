@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Nombre del Integrante 1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar Préstamo</title>
+
+  <!-- Estilo externo -->
+  <link rel="stylesheet" href="css/estilos.css" />
+
+  <!-- Estilo interno -->
+  <style>
+    form {
+      background-color: #f4f4f4;
+      padding: 25px;
+      width: 60%;
+      margin: 30px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      display: none; 
+    }
+
+    .checkbox-container {
+      margin-top: 10px;
+      display: flex;
+      align-items: center; 
+      gap: 8px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: blue;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: darkblue;
+    }
+
+    .titulo-container {
+      background-color: darkblue; 
+      color: white; 
+      text-align: center; 
+      padding: 20px; 
+      width: 100%; 
+      box-sizing: border-box; 
+      margin: 0; 
+    }
+
+    h1::before {
+      content: "📝 ";
+    }
+
+    .tipo-usuario {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+
+    .opcion {
+      display: flex;
+      align-items: center;
+    }
+
+    .opcion input {
+      margin-right: 5px;
+      width: auto;
+      cursor: pointer;
+    }
+
+    #terminos {
+      width: auto;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: var(--darkblue-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    :root {
+      --primary-color: #00bfff;
+      --hover-color: #009ace;
+      --background-color: #fefefe;
+      --text-color: white;
+      --darkblue-color: darkblue;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="titulo-container">
+    <h1 style="margin: 0;">Formulario de Préstamo de Libro</h1>
+  </div>
+
+  <form id="formPrestamo">
+    <label for="usuario">Nombre del usuario:</label>
+    <input type="text" id="usuario" />
+    <span class="error" id="errorUsuario">* Campo obligatorio</span>
+
+    <label for="titulo">Título del libro:</label>
+    <select id="titulo">
+      <option value="">-- Seleccione un libro --</option>
+      <option value="El Hobbit">El Hobbit</option>
+      <option value="Harry Potter y la Piedra Filosofal">Harry Potter y la Piedra Filosofal</option>
+      <option value="Las Crónicas de Narnia">Las Crónicas de Narnia</option>
+      <option value="Dune">Dune</option>
+      <option value="Fundación">Fundación</option>
+      <option value="Neuromante">Neuromante</option>
+      <option value="Orgullo y Prejuicio">Orgullo y Prejuicio</option>
+      <option value="Moby Dick">Moby Dick</option>
+      <option value="La Odisea">La Odisea</option>
+      <option value="La Sombra del Viento">La Sombra del Viento</option>
+      <option value="Cometas en el cielo">Cometas en el cielo</option>
+      <option value="Los juegos del hambre">Los juegos del hambre</option>
+    </select>
+    <span class="error" id="errorTitulo">* Seleccione un libro</span>
+
+    <label>Tipo de usuario:</label>
+    <div class="tipo-usuario">
+      <div class="opcion">
+        <input type="radio" name="tipo" value="Estudiante" id="tipoEstudiante" />
+        <label for="tipoEstudiante">Estudiante</label>
+      </div>
+      <div class="opcion">
+        <input type="radio" name="tipo" value="Docente" id="tipoDocente" />
+        <label for="tipoDocente">Docente</label>
+      </div>
+    </div>
+    <span class="error" id="errorTipo">* Seleccione una opción</span>
+
+    <label for="fecha">Fecha de préstamo:</label>
+    <input type="date" id="fecha" />
+    <span class="error" id="errorFecha">* Seleccione una fecha</span>
+
+    <label for="duracion">Duración del préstamo (días):</label>
+    <input type="number" id="duracion" min="1" max="30" />
+    <span class="error" id="errorDuracion">* Ingrese una duración válida</span>
+
+    <label for="estado">Estado del libro:</label>
+    <select id="estado">
+      <option value="">-- Seleccione --</option>
+      <option value="Nuevo">Nuevo</option>
+      <option value="Usado">Usado</option>
+    </select>
+    <span class="error" id="errorEstado">* Seleccione el estado</span>
+
+    <div class="checkbox-container">
+      <input type="checkbox" id="terminos" />
+      <label for="terminos" style="margin: 0; cursor: pointer;">Acepto las políticas de uso de la biblioteca</label>
+    </div>
+    <span class="error" id="errorTerminos">* Debe aceptar los términos</span>
+
+    <button type="submit">Registrar Préstamo</button>
+  </form>
+
+  <script>
+    const form = document.getElementById('formPrestamo');
+
+    const campos = {
+      usuario: {
+        input: document.getElementById('usuario'),
+        error: document.getElementById('errorUsuario'),
+        validar: valor => valor.trim() !== ""
+      },
+      titulo: {
+        input: document.getElementById('titulo'),
+        error: document.getElementById('errorTitulo'),
+        validar: valor => valor !== ""
+      },
+      tipo: {
+        error: document.getElementById('errorTipo'),
+        validar: () => document.querySelector('input[name="tipo"]:checked')
+      },
+      fecha: {
+        input: document.getElementById('fecha'),
+        error: document.getElementById('errorFecha'),
+        validar: valor => valor !== ""
+      },
+      duracion: {
+        input: document.getElementById('duracion'),
+        error: document.getElementById('errorDuracion'),
+        validar: valor => valor >= 1 && valor <= 30
+      },
+      estado: {
+        input: document.getElementById('estado'),
+        error: document.getElementById('errorEstado'),
+        validar: valor => valor !== ""
+      },
+      terminos: {
+        input: document.getElementById('terminos'),
+        error: document.getElementById('errorTerminos'),
+        validar: valor => valor === true
+      }
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      let valido = true;
+
+      for (let key in campos) {
+        const campo = campos[key];
+        const valor = key === 'tipo'
+          ? campo.validar()
+          : key === 'terminos'
+            ? campo.input.checked
+            : campo.input.value;
+
+        if (!campo.validar(valor)) {
+          campo.error.style.display = "inline";
+          valido = false;
+        } else {
+          campo.error.style.display = "none";
+        }
+      }
+
+      if (valido) {
+        alert("Préstamo registrado correctamente.");
+        form.reset();
+      }
+    });
+  </script>
+
+  <footer>
+    Biblioteca Escolar 2025
+  </footer>
+
+</body>
+</html>
+

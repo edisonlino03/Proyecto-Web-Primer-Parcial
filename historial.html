@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="author" content="Nombre del Integrante 2" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historial de Préstamos</title>
+
+  <!-- Estilo externo -->
+  <link rel="stylesheet" href="css/estilos.css" />
+
+  <!-- Estilo interno -->
+  <style>
+    .libro {
+      width: 80%;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .libro:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .libro-header {
+      padding: 10px 15px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #000;
+      cursor: pointer;
+      background-color: #cce5ff;
+      position: relative;
+    }
+
+    .libro-header::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      margin-right: 10px;
+      background-color: steelblue;
+      transition: background-color 0.5s ease;
+    }
+
+     /* Clases para cambiar color del ::before en cada libro */
+    .color-rojo::before {
+      background-color: red !important;
+    }
+    .color-verde::before {
+      background-color: limegreen !important;
+    }
+    .color-azul::before {
+      background-color: orange !important;
+    }
+    .color-amarillo::before {
+      background-color: yellow !important;
+    }
+
+    .prestamos {
+      background-color: #fff;
+      padding: 15px;
+      display: none;
+    }
+
+    .libro.activo .prestamos {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .persona {
+      margin-bottom: 15px;
+    }
+
+    .estado-verde {
+      color: green;
+      font-weight: bold;
+    }
+
+    .estado-rojo {
+      color: red;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .titulo-container {
+      background-color: darkblue; 
+      color: white;
+      text-align: center; 
+      padding: 20px; 
+      width: 100%; 
+      box-sizing: border-box; 
+      margin: 0; 
+    }
+
+    h1::before {
+    content: "📄"
+     }
+    
+    footer {
+      background-color: var(--darkblue-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    :root {
+      --primary-color: #00bfff;
+      --hover-color: #009ace;
+      --background-color: #fefefe;
+      --text-color: white;
+      --darkblue-color: darkblue;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="titulo-container">
+    <h1 style="margin: 0;">Historial de Préstamos</h1>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">El Hobbit</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Lucas Martínez</strong> (Estudiante)<br />
+        Fecha de préstamo: 15/01/2025<br />
+        Fecha de devolución: 22/01/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+      <div class="persona">
+        <strong>Ana Gómez</strong> (Maestra)<br />
+        Fecha de préstamo: 01/02/2025<br />
+        Fecha de devolución: 08/02/2025<br />
+        Estado: <span class="estado-rojo">Retraso de 3 días</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Harry Potter y la Piedra Filosofal</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Laura Fernández</strong> (Estudiante)<br />
+        Fecha de préstamo: 10/03/2025<br />
+        Fecha de devolución: 17/03/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+      <div class="persona">
+        <strong>Carlos Sánchez</strong> (Maestro)<br />
+        Fecha de préstamo: 05/04/2025<br />
+        Fecha de devolución: 12/04/2025<br />
+        Estado: <span class="estado-rojo">Retraso de 2 días</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Las Crónicas de Narnia</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>María López</strong> (Estudiante)<br />
+        Fecha de préstamo: 15/04/2025<br />
+        Fecha de devolución: 22/04/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Dune</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Pedro Fernández</strong> (Maestro)<br />
+        Fecha de préstamo: 10/03/2025<br />
+        Fecha de devolución: 17/03/2025<br />
+        Estado: <span class="estado-rojo">Retraso de 1 día</span>
+      </div>
+      <div class="persona">
+        <strong>Isabel Rodríguez</strong> (Estudiante)<br />
+        Fecha de préstamo: 20/02/2025<br />
+        Fecha de devolución: 27/02/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Fundación</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Diego Torres</strong> (Estudiante)<br />
+        Fecha de préstamo: 01/01/2025<br />
+        Fecha de devolución: 08/01/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+      <div class="persona">
+        <strong>Laura Vargas</strong> (Maestra)<br />
+        Fecha de préstamo: 15/01/2025<br />
+        Fecha de devolución: 22/01/2025<br />
+        Estado: <span class="estado-rojo">Retraso de 4 días</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Neuromante</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Manuel Cruz</strong> (Estudiante)<br />
+        Fecha de préstamo: 25/03/2025<br />
+        Fecha de devolución: 01/04/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Orgullo y Prejuicio</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Verónica Rojas</strong> (Maestra)<br />
+        Fecha de préstamo: 10/02/2025<br />
+        Fecha de devolución: 20/02/2025<br />
+        Estado: <span class="estado-rojo">Retraso de 2 días</span>
+      </div>
+      <div class="persona">
+        <strong>Andrés Romero</strong> (Estudiante)<br />
+        Fecha de préstamo: 02/03/2025<br />
+        Fecha de devolución: 09/03/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Moby Dick</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Patricia Mendoza</strong> (Estudiante)<br />
+        Fecha de préstamo: 05/04/2025<br />
+        Fecha de devolución: 12/04/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">La Odisea</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Javier Ramírez</strong> (Maestro)<br />
+        Fecha de préstamo: 18/03/2025<br />
+        Fecha de devolución: 25/03/2025<br />
+        Estado: <span class="estado-rojo">Retraso de 1 día</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">La Sombra del Viento</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Carolina Rivera</strong> (Estudiante)<br />
+        Fecha de préstamo: 22/02/2025<br />
+        Fecha de devolución: 29/02/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Cometas en el cielo</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Fernando Ortiz</strong> (Maestro)<br />
+        Fecha de préstamo: 10/01/2025<br />
+        Fecha de devolución: 17/01/2025<br />
+        Estado: <span class="estado-rojo">Retraso de 3 días</span>
+      </div>
+      <div class="persona">
+        <strong>Sofía Gil</strong> (Estudiante)<br />
+        Fecha de préstamo: 05/02/2025<br />
+        Fecha de devolución: 12/02/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="libro">
+    <div class="libro-header">Los juegos del hambre</div>
+    <div class="prestamos">
+      <div class="persona">
+        <strong>Raúl Castillo</strong> (Estudiante)<br />
+        Fecha de préstamo: 01/03/2025<br />
+        Fecha de devolución: 08/03/2025<br />
+        Estado: <span class="estado-verde">Devuelto a tiempo</span>
+      </div>
+      <div class="persona">
+        <strong>María Peña</strong> (Maestra)<br />
+        Fecha de préstamo: 15/03/2025<br />
+        Fecha de devolución: 22/03/2025<br />
+        Estado: <span class="estado-rojo">Retraso de 1 día</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script interno -->
+  <script>
+    document.querySelectorAll('.libro-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const contenedor = header.parentElement;
+        contenedor.classList.toggle('activo');
+      });
+    });
+
+    // Colores en secuencia para el ::before de todos los libros
+    const colores = ['color-rojo', 'color-verde', 'color-azul', 'color-amarillo'];
+    document.querySelectorAll('.libro').forEach((libro, index) => {
+      const header = libro.querySelector('.libro-header');
+      let colorIndex = index % colores.length;
+      header.classList.add(colores[colorIndex]);
+      if (libro) {
+        let currentColorIndex = colorIndex;
+        setInterval(() => {
+          // Remover todas las clases de color
+          colores.forEach(c => header.classList.remove(c));
+          // Añadir siguiente clase
+          currentColorIndex = (currentColorIndex + 1) % colores.length;
+          header.classList.add(colores[currentColorIndex]);
+        }, 2000 + (index * 300)); // intervalo desplazado para que no cambien todos a la vez
+      }
+    });
+  </script>
+
+  <footer>
+    Biblioteca Escolar 2025
+  </footer>
+  
+</body>
+</html>

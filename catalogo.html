@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Nombre del Integrante 4">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Géneros Literarios</title>
+
+  <!-- Estilo externo -->
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <!-- Estilo interno -->
+  <style>
+    :root {
+      --primary-color: #00bfff;
+      --hover-color: #009ace;
+      --background-color: #fefefe;
+      --text-color: white;
+      --darkblue-color: darkblue;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: var(--background-color);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .genero {
+      background-color: #f2f2f2;
+      margin: 15px auto;
+      border-radius: 8px;
+      width: 80%;
+      box-shadow: 0 0 5px #aaa;
+      transition: background-color 0.4s ease, transform 0.4s ease;
+    }
+
+    .genero > .genero-header {
+      padding: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: #e2f0ff;
+      font-size: 18px;
+      transition: background-color 0.3s ease, font-size 0.3s ease;
+    }
+
+    .genero:hover {
+      background-color: #dceeff;
+      transform: scale(1.02);
+    }
+
+    .genero > .genero-header:hover {
+      background-color: #cce4ff;
+      font-size: 20px;
+    }
+
+    .genero .genero-contenido {
+      display: none;
+      padding: 15px;
+      background-color: #fff;
+      border-top: 1px solid #ccc;
+    }
+
+    .genero.activo .genero-contenido {
+      display: block;
+    }
+
+    .genero ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .titulo-container {
+      background-color: var(--darkblue-color); 
+      color: var(--text-color); 
+      text-align: center; 
+      padding: 20px; 
+      width: 100%; 
+      box-sizing: border-box; 
+      margin: 0; 
+    }
+
+    h1::before {
+      content: "📚";
+    }
+
+    footer {
+      background-color: var(--darkblue-color);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px 0;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="titulo-container">
+    <h1 style="margin: 0;">Catálogo por Género Literario</h1>
+  </div>
+
+  <main>
+    <div class="genero">
+      <div class="genero-header" aria-expanded="false">📚 Fantasía</div>
+      <div class="genero-contenido">
+        <ul>
+          <li>El Hobbit – J.R.R. Tolkien</li>
+          <li>Harry Potter y la Piedra Filosofal – J.K. Rowling</li>
+          <li>Las Crónicas de Narnia – C.S. Lewis</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="genero">
+      <div class="genero-header" aria-expanded="false">🚀 Ciencia Ficción</div>
+      <div class="genero-contenido">
+        <ul>
+          <li>Dune – Frank Herbert</li>
+          <li>Fundación – Isaac Asimov</li>
+          <li>Neuromante – William Gibson</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="genero">
+      <div class="genero-header" aria-expanded="false">📘 Clásicos</div>
+      <div class="genero-contenido">
+        <ul>
+          <li>Orgullo y Prejuicio – Jane Austen</li>
+          <li>Moby Dick – Herman Melville</li>
+          <li>La Odisea – Homero</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="genero">
+      <div class="genero-header" aria-expanded="false">📖 Novela Contemporánea</div>
+      <div class="genero-contenido">
+        <ul>
+          <li>La Sombra del Viento – Carlos Ruiz Zafón</li>
+          <li>Cometas en el cielo – Khaled Hosseini</li>
+          <li>Los juegos del hambre – Suzanne Collins</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script interno -->
+  <script>
+    document.querySelectorAll('.genero').forEach(genero => {
+      genero.querySelector('.genero-header').addEventListener('click', () => {
+        genero.classList.toggle('activo');
+        const isActive = genero.classList.contains('activo');
+        genero.querySelector('.genero-header').setAttribute('aria-expanded', isActive);
+      });
+    });
+  </script>
+
+  <footer>
+    Biblioteca Escolar 2025
+  </footer>
+
+</body>
+</html>
+
